@@ -1,0 +1,19 @@
+﻿@page
+@model LastSearchModel
+@{
+    ViewData["Title"] = "Ostatnio Szukane";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Oto twoje ostatnie wyszukiwanie: </p>
+
+
+@if (Model.GiveInt != null)
+    {
+<p>
+    @Model.Message <br />
+    @Html.DisplayNameFor(model => Model.GiveInt.Number):
+    @Model.GiveInt.Number <br />
+    data wyszukiwania: @Model.Data
+</p>
+     }
