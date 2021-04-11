@@ -26,7 +26,7 @@ namespace FizzBuzzWeb.Pages
 
         public void OnGet()
         {
-            var SessionGiveInt = HttpContext.Session.GetString("SessionNumber");
+            var SessionGiveInt = HttpContext.Session.GetString("SessionNumber");    
             var SessionDate = HttpContext.Session.GetString("SessionDate");
             if (SessionGiveInt != null)
             {

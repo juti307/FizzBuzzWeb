@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using FizzBuzzWeb.Data;
 
+
 namespace FizzBuzzWeb.Pages
 {
     public class IndexModel : PageModel
@@ -51,7 +52,8 @@ namespace FizzBuzzWeb.Pages
                     _context.Searches.Add(src);
                     await _context.SaveChangesAsync();
                 }
-                
+
+                //return RedirectToPage("./LastSearch");
             }
             return Page();
         }
