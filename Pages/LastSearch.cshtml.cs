@@ -21,18 +21,18 @@ namespace FizzBuzzWeb.Pages
         }
 
         public GiveInt GiveInt { get; set; }
-        public string Data { get; set; }
+        public DateTime Data { get; set; }
         public string Message { get; set; }
 
         public void OnGet()
         {
             var SessionGiveInt = HttpContext.Session.GetString("SessionNumber");    
-
+            var SessionDate = HttpContext.Session.GetString("SessionDate");
             if (SessionGiveInt != null)
             {
                 Message = HttpContext.Session.GetString("SessionMessage");
                 GiveInt = JsonConvert.DeserializeObject<GiveInt>(SessionGiveInt);
-                Data = HttpContext.Session.GetString("SessionDate"); 
+                Data = JsonConvert.DeserializeObject<DateTime>(SessionDate); 
             }
         }
     }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using FizzBuzzWeb.Data;
 
 
 namespace FizzBuzzWeb.Pages
@@ -15,12 +16,14 @@ namespace FizzBuzzWeb.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly SearchesContext _context;
         [BindProperty]
         public GiveInt GiveInt { get; set; }
-        public string Message { get; set; }
-        public IndexModel(ILogger<IndexModel> logger)
+        public string Msg { get; set; }
+        public IndexModel(ILogger<IndexModel> logger, SearchesContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public void OnGet()
@@ -28,14 +31,27 @@ namespace FizzBuzzWeb.Pages
            
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                Message = GiveInt.Fizzbuzz(GiveInt.Number);
+                
+                Msg = GiveInt.Fizzbuzz(GiveInt.Number);
                 HttpContext.Session.SetString("SessionNumber", JsonConvert.SerializeObject(GiveInt));
-                HttpContext.Session.SetString("SessionDate", JsonConvert.SerializeObject(DateTime.Today.ToString("d")));
-                HttpContext.Session.SetString("SessionMessage", Message);
+                HttpContext.Session.SetString("SessionDate", JsonConvert.SerializeObject(DateTime.Now));
+                HttpContext.Session.SetString("SessionMessage", Msg);
+
+                using (_context)
+                {
+                    var src = new Searches()
+                    {
+                        Date = DateTime.Now,
+                        Number = GiveInt.Number,
+                        Message = Msg 
+                    };
+                    _context.Searches.Add(src);
+                    await _context.SaveChangesAsync();
+                }
 
                 //return RedirectToPage("./LastSearch");
             }

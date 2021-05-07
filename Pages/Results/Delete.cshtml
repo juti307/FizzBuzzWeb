@@ -1,0 +1,40 @@
+﻿@page
+@model FizzBuzzWeb.Pages.Results.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuwanie elementu";
+}
+
+<h1>Usuwanie elementu</h1>
+
+<h3>Jesteś pewien, że chcesz to usunąć?</h3>
+<div>
+    <h4>Ostatnio szukane</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Searches.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Searches.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Searches.Number)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Searches.Number)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Searches.Message)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Searches.Message)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Searches.Id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Wróć do ostanio szukanych</a>
+    </form>
+</div>
