@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using FizzBuzzWeb.Data;
-
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace FizzBuzzWeb.Pages
 {
@@ -20,6 +21,7 @@ namespace FizzBuzzWeb.Pages
         [BindProperty]
         public GiveInt GiveInt { get; set; }
         public string Msg { get; set; }
+        public IdentityUser GetUser { get; set; }
         public IndexModel(ILogger<IndexModel> logger, SearchesContext context)
         {
             _logger = logger;
@@ -47,7 +49,8 @@ namespace FizzBuzzWeb.Pages
                     {
                         Date = DateTime.Now,
                         Number = GiveInt.Number,
-                        Message = Msg 
+                        Message = Msg,
+                        User = User.FindFirstValue(ClaimTypes.NameIdentifier)
                     };
                     _context.Searches.Add(src);
                     await _context.SaveChangesAsync();

@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FizzBuzzWeb.Data;
 using FizzBuzzWeb.Pages.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace FizzBuzzWeb.Pages.Results
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly FizzBuzzWeb.Data.SearchesContext _context;
@@ -20,12 +24,14 @@ namespace FizzBuzzWeb.Pages.Results
         }
 
         public IList<Searches> Searches { get;set; }
+        public string GetUser { get; set; }
 
         public async Task OnGetAsync()
         {
+            GetUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Searches = await _context.Searches
                 .OrderByDescending(p=>p.Date)
-                .Take<Searches>(10)
+                .Take<Searches>(20)
                 .ToListAsync();
             
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +19,7 @@ namespace FizzBuzzWeb.Pages.Models
         [Required]
         [MaxLength(200)]
         public string Message { get; set; }
+        public string User { get; set; } 
 
 
     }

@@ -10,6 +10,7 @@ using FizzBuzzWeb.Pages.Models;
 
 namespace FizzBuzzWeb.Pages.Results
 {
+   
     public class DeleteModel : PageModel
     {
         private readonly FizzBuzzWeb.Data.SearchesContext _context;

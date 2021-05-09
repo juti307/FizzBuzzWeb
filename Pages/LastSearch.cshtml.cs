@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using FizzBuzzWeb.Pages.Models;
 
+
 namespace FizzBuzzWeb.Pages
 {
+
     public class LastSearchModel : PageModel
     {
         private readonly ILogger<LastSearchModel> _logger;

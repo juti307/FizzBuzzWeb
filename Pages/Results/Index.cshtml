@@ -36,8 +36,10 @@
                 @Html.DisplayFor(modelItem => item.Message)
             </td>
             <td>
-
+@if (item.User != null && item.User == Model.GetUser)
+{
                 <a asp-page="./Delete" asp-route-id="@item.Id">Usuń</a>
+}
             </td>
         </tr>
 }
